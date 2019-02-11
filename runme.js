@@ -25,7 +25,7 @@ var mimeTypes = {
 };
 
 http.createServer(function(req, res) {
-
+  
   var uri = url.parse(req.url).pathname;
   console.log("URL being requested:", uri);
   
@@ -155,7 +155,8 @@ http.createServer(function(req, res) {
     
   }
 
-}).listen(process.env.PORT);
+// }).listen(process.env.PORT);
+}).listen(8080);
 
 String.prototype.regexIndexOf = function(regex, startpos) {
     var indexOf = this.substring(startpos || 0).search(regex);
@@ -184,7 +185,7 @@ var widgetSrc, widget, id, deps, cpdefine, requirejs, cprequire_test;
 var widgetDocs = {};
 
 var init = function() {
-    github = getGithubUrl();
+  github = getGithubUrl();
 }
 
 var isEvaled = false;
@@ -1348,24 +1349,35 @@ var getGithubUrl = function(callback) {
   var cmd = 'git config --get remote.origin.url';
 
   var stdout = childproc.execSync(cmd, { encoding: 'utf8' });
-  //console.log("Got the following Github URL:", stdout);
+  // console.log("Got the following Github URL:", stdout);
 
-  var re = /.*github.com:/i;
+  // var re = /.*github.com:/i;
+  // var url = stdout.replace(re, "");
+  var re = /.*github.com./i;
   var url = stdout.replace(re, "");
   url = url.replace(/.git[\s\S]*$/i, ""); // remove end
-  
+  // url = url.replace(/.io.git[\s\S]*$/i, ".io"); // remove end
+  var userName = url.replace(/\/[\s\S]*$/i, "");
+
+  // re = RegExp(userName + '/');
+  // var rawurl = url.replace(re, "https://");
+  re = RegExp(userName + '/');
+  var repoName = url.replace(re, '');
+  var rawurl = 'https://' + userName + '.github.io/' + repoName;
+  rawurl += '/' + fileAutoGeneratePath;
+
+  url = "https://github.com/" + url;
+
   // prepend with clean githut url
-  url = "http://github.com/" + url;
-  
-  var rawurl = url.replace(/\/github.com\//i, "/raw.githubusercontent.com/");
-  rawurl += '/master/' + fileAutoGeneratePath;
-  
+  // url = "http://github.com/" + url;
+
+
   var ret = {
     url: url,
     rawurl : rawurl
   };
   
-  //console.log("ret:", ret);
+  console.log("ret:", ret);
   return ret;
     
 }
