@@ -1377,7 +1377,7 @@ var getGithubUrl = function(callback) {
     rawurl : rawurl
   };
   
-  console.log("ret:", ret);
+  // console.log("ret:", ret);
   return ret;
     
 }
