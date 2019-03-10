@@ -69,7 +69,7 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
                 setTimeout(function() { $(window).trigger('resize'); }, 100);
             });
             
-            this.loadTemplateWidget();
+            /* this.loadTemplateWidget(); */
 
             this.loadTestYGWidget();
             
@@ -122,7 +122,7 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
          * Load the Template widget via chilipeppr.load() so folks have a sample
          * widget they can fork as a starting point for their own.
          */
-        loadTemplateWidget: function(callback) {
+        /* loadTemplateWidget: function(callback) {
 
             chilipeppr.load(
                 "#com-chilipeppr-widget-template-instance",
@@ -140,7 +140,7 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
                     );
                 }
             );
-        },
+        }, */
 
         loadTestYGWidget: function (callback) {
             chilipeppr.load(
@@ -150,7 +150,26 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
                     // Callback after widget loaded into #myDivWidgetTemplate
                     // Now use require.js to get reference to instantiated widget
                     cprequire(
-                        ["inline:com-chilipeppr-widget-template"], // the id you gave your widget
+                        ["inline:com-chilipeppr-widget-yg"], // the id you gave your widget
+                        function (myObjWidgetTemplate) {
+                            // Callback that is passed reference to the newly loaded widget
+                            console.log("Widget / Template just got loaded.", myObjWidgetTemplate);
+                            myObjWidgetTemplate.init();
+                        }
+                    );
+                }
+            );
+        },
+
+        loadsvg2gcodeYGWidget: function (callback) {
+            chilipeppr.load(
+                "com-widget-svg2gcode-yg",
+                "https://yuskegoto.github.io/widget-svg2gcode-yg/auto-generated-widget.html",
+                function () {
+                    // Callback after widget loaded into #myDivWidgetTemplate
+                    // Now use require.js to get reference to instantiated widget
+                    cprequire(
+                        ["inline:com-widget-svg2gcode-yg"], // the id you gave your widget
                         function (myObjWidgetTemplate) {
                             // Callback that is passed reference to the newly loaded widget
                             console.log("Widget / Template just got loaded.", myObjWidgetTemplate);
