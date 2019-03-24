@@ -18,6 +18,7 @@ not conflict with other ChiliPeppr objects.
 | Edit URL              | https://github.com/yuskegoto/workspace-yg |
 | Github URL            | https://github.com/yuskegoto/workspace-yg |
 | Test URL              | https://yuskegoto.github.io/workspace-yg/auto-generated-workspace.html |
+| Local Test URL        | http://localhost:8080/workspace.html |
 
 ## Example Code for chilipeppr.load() Statement
 
