@@ -39,8 +39,8 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
          * The ID of the widget. You must define this and make it unique.
          */
         id: "com-chilipeppr-workspace-yg", // Make the id the same as the cpdefine id
-        name: "Workspace / TinyG", // The descriptive name of your widget.
-        desc: `This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG.`,
+        name: "Workspace / Pendeograph", // The descriptive name of your widget.
+        desc: `This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards Pendeograph drawing machine using GRBL.`,
         url: "(auto fill by runme.js)", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
         fiddleurl: "(auto fill by runme.js)", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
         githuburl: "(auto fill by runme.js)", // The backing github repo
@@ -227,126 +227,126 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
             // the workspace can be referred to
             var wsObj = this;
             
-            // Load XBox Controller Widget
-            chilipeppr.load(
-              "#com-chilipeppr-ws-xbox",
-              "http://raw.githubusercontent.com/chilipeppr/widget-xbox/master/auto-generated-widget.html",
-              function() {
-                // Callback after widget loaded into #myDivWidgetXbox
-                // Now use require.js to get reference to instantiated widget
-                cprequire(
-                  ["inline:com-chilipeppr-widget-xbox"], // the id you gave your widget
-                  function(myObjWidgetXbox) {
-                    // Callback that is passed reference to the newly loaded widget
-                    console.log("Widget / Xbox just got loaded.", myObjWidgetXbox);
-                    myObjWidgetXbox.init();
+            // // Load XBox Controller Widget
+            // chilipeppr.load(
+            //   "#com-chilipeppr-ws-xbox",
+            //   "http://raw.githubusercontent.com/chilipeppr/widget-xbox/master/auto-generated-widget.html",
+            //   function() {
+            //     // Callback after widget loaded into #myDivWidgetXbox
+            //     // Now use require.js to get reference to instantiated widget
+            //     cprequire(
+            //       ["inline:com-chilipeppr-widget-xbox"], // the id you gave your widget
+            //       function(myObjWidgetXbox) {
+            //         // Callback that is passed reference to the newly loaded widget
+            //         console.log("Widget / Xbox just got loaded.", myObjWidgetXbox);
+            //         myObjWidgetXbox.init();
                     
-                    // setup toggle button
-                    var zwBtn = $('#com-chilipeppr-ws-menu .xbox-button');
-                    var zwDiv = $('#com-chilipeppr-ws-xbox');
-                    zwBtn.click(function() {
-                        if (zwDiv.hasClass("hidden")) {
-                            // unhide
-                            zwDiv.removeClass("hidden");
-                            zwBtn.addClass("active");
-                        }
-                        else {
-                            zwDiv.addClass("hidden");
-                            zwBtn.removeClass("active");
-                        }
-                        $(window).trigger('resize');
-                    });
-                  }
-                );
-              }
-            );
+            //         // setup toggle button
+            //         var zwBtn = $('#com-chilipeppr-ws-menu .xbox-button');
+            //         var zwDiv = $('#com-chilipeppr-ws-xbox');
+            //         zwBtn.click(function() {
+            //             if (zwDiv.hasClass("hidden")) {
+            //                 // unhide
+            //                 zwDiv.removeClass("hidden");
+            //                 zwBtn.addClass("active");
+            //             }
+            //             else {
+            //                 zwDiv.addClass("hidden");
+            //                 zwBtn.removeClass("active");
+            //             }
+            //             $(window).trigger('resize');
+            //         });
+            //       }
+            //     );
+            //   }
+            // );
 
-            this.font2gcodeObj = function() {
-                return {
-                    name: "font2gcode",
-                    url: "http://raw.githubusercontent.com/chilipeppr/widget-font2gcode/master/auto-generated-widget.html",
-                    id: "com-zipwhip-widget-font2gcode",
-                    btn: $('#com-chilipeppr-ws-menu .font2gcode-button'),
-                    div: $('#com-chilipeppr-ws-font2gcode'),
-                    instance: null,
-                    init: function() {
-                        this.btn.click(this.toggle.bind(this));
+            // this.font2gcodeObj = function() {
+            //     return {
+            //         name: "font2gcode",
+            //         url: "http://raw.githubusercontent.com/chilipeppr/widget-font2gcode/master/auto-generated-widget.html",
+            //         id: "com-zipwhip-widget-font2gcode",
+            //         btn: $('#com-chilipeppr-ws-menu .font2gcode-button'),
+            //         div: $('#com-chilipeppr-ws-font2gcode'),
+            //         instance: null,
+            //         init: function() {
+            //             this.btn.click(this.toggle.bind(this));
                         
-                        // do NOT dynamically load this one since it has a pubsub that's key to get called
-                        // and in future may register for drag/drop events for .txt files  
-                        this.load();
+            //             // do NOT dynamically load this one since it has a pubsub that's key to get called
+            //             // and in future may register for drag/drop events for .txt files  
+            //             this.load();
                         
-                        // we need to subscribe to the /didDrop signal of this widget so we know to show it
-                        //chilipeppr.subscribe("/" + this.id + "/didDrop", this, this.show);
-                        console.log("done instantiating " + this.name + " add-on widget");
-                    },
-                    load: function(callback) {
-                        var that = this;
-                        chilipeppr.load(
-                          this.div.prop("id"),
-                          this.url,
-                          function() {
-                            // Callback after widget loaded into #myDivWidgetRecvtext
-                            // Now use require.js to get reference to instantiated widget
-                            cprequire(
-                              ["inline:" + that.id], // the id you gave your widget
-                              function(myObjWidget) {
-                                // Callback that is passed reference to the newly loaded widget
-                                console.log(that.name + " just got loaded.", myObjWidget);
-                                //myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
-                                myObjWidget.init();
-                                //myObjWidget.activate();
-                                that.instance = myObjWidget;
-                                if (callback) callback(that.instance);
-                              }
-                            );
-                          }
-                        );
-                    },
-                    toggle: function() {
-                        if (this.div.hasClass("hidden")) {
-                            // unhide
-                            this.show();
-                        }
-                        else {
-                            this.hide();
-                        }
-                    },
-                    show: function() {
-                        this.div.removeClass("hidden");
-                        this.btn.addClass("active");
+            //             // we need to subscribe to the /didDrop signal of this widget so we know to show it
+            //             //chilipeppr.subscribe("/" + this.id + "/didDrop", this, this.show);
+            //             console.log("done instantiating " + this.name + " add-on widget");
+            //         },
+            //         load: function(callback) {
+            //             var that = this;
+            //             chilipeppr.load(
+            //               this.div.prop("id"),
+            //               this.url,
+            //               function() {
+            //                 // Callback after widget loaded into #myDivWidgetRecvtext
+            //                 // Now use require.js to get reference to instantiated widget
+            //                 cprequire(
+            //                   ["inline:" + that.id], // the id you gave your widget
+            //                   function(myObjWidget) {
+            //                     // Callback that is passed reference to the newly loaded widget
+            //                     console.log(that.name + " just got loaded.", myObjWidget);
+            //                     //myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
+            //                     myObjWidget.init();
+            //                     //myObjWidget.activate();
+            //                     that.instance = myObjWidget;
+            //                     if (callback) callback(that.instance);
+            //                   }
+            //                 );
+            //               }
+            //             );
+            //         },
+            //         toggle: function() {
+            //             if (this.div.hasClass("hidden")) {
+            //                 // unhide
+            //                 this.show();
+            //             }
+            //             else {
+            //                 this.hide();
+            //             }
+            //         },
+            //         show: function() {
+            //             this.div.removeClass("hidden");
+            //             this.btn.addClass("active");
     
-                        console.log("got show for " + this.name + ", this:", this, "wsObj:", wsObj);
+            //             console.log("got show for " + this.name + ", this:", this, "wsObj:", wsObj);
                         
-                        // see if instantiated already
-                        // if so, just activate
-                        if (this.instance != null) {
-                            console.log("activating " + this.name + " instead of re-instantiating cuz already created");
-                            this.instance.activate();
-                            //if (callback) callback(this.instance);
-                        }
-                        else {
-                            // otherwise, dynamic load
-                            console.log(this.name + " appears to not be instantiated, let us load it from scratch")
+            //             // see if instantiated already
+            //             // if so, just activate
+            //             if (this.instance != null) {
+            //                 console.log("activating " + this.name + " instead of re-instantiating cuz already created");
+            //                 this.instance.activate();
+            //                 //if (callback) callback(this.instance);
+            //             }
+            //             else {
+            //                 // otherwise, dynamic load
+            //                 console.log(this.name + " appears to not be instantiated, let us load it from scratch")
                             
-                        }
-                        $(window).trigger('resize');
-                    },
-                    hide: function() {
-                        this.div.addClass("hidden");
-                        this.btn.removeClass("active");
+            //             }
+            //             $(window).trigger('resize');
+            //         },
+            //         hide: function() {
+            //             this.div.addClass("hidden");
+            //             this.btn.removeClass("active");
                         
-                        console.log("got hide for " + this.name + ". this:", this, "wsObj:", wsObj);
+            //             console.log("got hide for " + this.name + ". this:", this, "wsObj:", wsObj);
                         
-                        if (this.instance != null) {
-                            this.instance.unactivate();
-                        }
-                        $(window).trigger('resize');
-                    }
-                };
-            }();
-            this.font2gcodeObj.init();
-            //End Font2Gcode
+            //             if (this.instance != null) {
+            //                 this.instance.unactivate();
+            //             }
+            //             $(window).trigger('resize');
+            //         }
+            //     };
+            // }();
+            // this.font2gcodeObj.init();
+            // //End Font2Gcode
 
             this.svg2gcodeObj = function() {
                 return {
@@ -1251,26 +1251,26 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
             ); //End Serial Port Console Log Window
 
 
-            // XYZ
-            // http://jsfiddle.net/chilipeppr/gh45j/
-            chilipeppr.load(
-                "com-chilipeppr-xyz",
-                // Lauer's new widget 8/16/15
-                "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html", 
-                // Temporary widget from Danal
-                //"http://fiddle.jshell.net/Danal/vktco1y6/show/light/", 
-                // Lauer's original core widget
-                //"http://fiddle.jshell.net/chilipeppr/gh45j/show/light/",
+            // // XYZ
+            // // http://jsfiddle.net/chilipeppr/gh45j/
+            // chilipeppr.load(
+            //     "com-chilipeppr-xyz",
+            //     // Lauer's new widget 8/16/15
+            //     "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html", 
+            //     // Temporary widget from Danal
+            //     //"http://fiddle.jshell.net/Danal/vktco1y6/show/light/", 
+            //     // Lauer's original core widget
+            //     //"http://fiddle.jshell.net/chilipeppr/gh45j/show/light/",
         
-                function () {
-                    cprequire(
-                    ["inline:com-chilipeppr-widget-xyz"],
+            //     function () {
+            //         cprequire(
+            //         ["inline:com-chilipeppr-widget-xyz"],
             
-                    function (xyz) {
-                        xyz.init();
-                    });
-                }
-            ); //End XYZ
+            //         function (xyz) {
+            //             xyz.init();
+            //         });
+            //     }
+            // ); //End XYZ
             
             // TinyG
             // http://jsfiddle.net/chilipeppr/XxEBZ/
@@ -1294,82 +1294,82 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
                 }
             ); //End TinyG
 
-            // Cayenn Widget
-            chilipeppr.load(
-              "#com-chilipeppr-ws-cayenn",
-              "http://raw.githubusercontent.com/chilipeppr/widget-cayenn/master/auto-generated-widget.html",
-              function() {
-                // Callback after widget loaded into #myDivWidgetCayenn
-                // Now use require.js to get reference to instantiated widget
-                cprequire(
-                  ["inline:com-chilipeppr-widget-cayenn"], // the id you gave your widget
-                  function(myObjWidgetCayenn) {
-                    // Callback that is passed reference to the newly loaded widget
-                    console.log("Widget / Cayenn just got loaded.", myObjWidgetCayenn);
-                    myObjWidgetCayenn.init();
+            // // Cayenn Widget
+            // chilipeppr.load(
+            //   "#com-chilipeppr-ws-cayenn",
+            //   "http://raw.githubusercontent.com/chilipeppr/widget-cayenn/master/auto-generated-widget.html",
+            //   function() {
+            //     // Callback after widget loaded into #myDivWidgetCayenn
+            //     // Now use require.js to get reference to instantiated widget
+            //     cprequire(
+            //       ["inline:com-chilipeppr-widget-cayenn"], // the id you gave your widget
+            //       function(myObjWidgetCayenn) {
+            //         // Callback that is passed reference to the newly loaded widget
+            //         console.log("Widget / Cayenn just got loaded.", myObjWidgetCayenn);
+            //         myObjWidgetCayenn.init();
                     
-                    // this widget has a lot of modals that pop up whenever, so we need to make sure the parent div is
-                    // not hidden. instead we'll hide the exact widget because the modals are outside the div of the widget
-                    $('#com-chilipeppr-ws-cayenn').removeClass("hidden");
+            //         // this widget has a lot of modals that pop up whenever, so we need to make sure the parent div is
+            //         // not hidden. instead we'll hide the exact widget because the modals are outside the div of the widget
+            //         $('#com-chilipeppr-ws-cayenn').removeClass("hidden");
                     
-                    var btn = $('#com-chilipeppr-ws-menu .cayenn-button');
-                    var div = $('#com-chilipeppr-widget-cayenn');
-                    div.addClass("hidden");
-                    btn.click(function() {
-                        if (div.hasClass("hidden")) {
-                            // show widget
-                            div.removeClass("hidden");
-                            btn.addClass("active");
-                        } else {
-                            // hide widget
-                            div.addClass("hidden");
-                            btn.removeClass("active");
-                        }
-                        setTimeout(function() {
-                            $(window).trigger('resize');
-                        }, 200);
-                    });
+            //         var btn = $('#com-chilipeppr-ws-menu .cayenn-button');
+            //         var div = $('#com-chilipeppr-widget-cayenn');
+            //         div.addClass("hidden");
+            //         btn.click(function() {
+            //             if (div.hasClass("hidden")) {
+            //                 // show widget
+            //                 div.removeClass("hidden");
+            //                 btn.addClass("active");
+            //             } else {
+            //                 // hide widget
+            //                 div.addClass("hidden");
+            //                 btn.removeClass("active");
+            //             }
+            //             setTimeout(function() {
+            //                 $(window).trigger('resize');
+            //             }, 200);
+            //         });
                     
-                  }
-                );
-              }
-            );
+            //       }
+            //     );
+            //   }
+            // );
             
-            // Frank Herrmann's Webcam Widget
-            chilipeppr.load(
-              "#com-chilipeppr-ws-webcam",
-              "http://raw.githubusercontent.com/xpix/widget-cam/master/auto-generated-widget.html",
-              function() {
-                // Callback after widget loaded into #myDivWidgetCam
-                // Now use require.js to get reference to instantiated widget
-                cprequire(
-                  ["inline:com-chilipeppr-widget-cam"], // the id you gave your widget
-                  function(myObjWidgetCam) {
-                    // Callback that is passed reference to the newly loaded widget
-                    console.log("Widget / Cam just got loaded.", myObjWidgetCam);
-                    myObjWidgetCam.init();
+            // // Frank Herrmann's Webcam Widget
+            // chilipeppr.load(
+            //   "#com-chilipeppr-ws-webcam",
+            //   "http://raw.githubusercontent.com/xpix/widget-cam/master/auto-generated-widget.html",
+            //   function() {
+            //     // Callback after widget loaded into #myDivWidgetCam
+            //     // Now use require.js to get reference to instantiated widget
+            //     cprequire(
+            //       ["inline:com-chilipeppr-widget-cam"], // the id you gave your widget
+            //       function(myObjWidgetCam) {
+            //         // Callback that is passed reference to the newly loaded widget
+            //         console.log("Widget / Cam just got loaded.", myObjWidgetCam);
+            //         myObjWidgetCam.init();
                     
-                    var btn = $('#com-chilipeppr-ws-menu .webcam-button');
-                    var div = $('#com-chilipeppr-ws-webcam');
-                    div.addClass("hidden");
-                    btn.click(function() {
-                        if (div.hasClass("hidden")) {
-                            // show widget
-                            div.removeClass("hidden");
-                            btn.addClass("active");
-                        } else {
-                            // hide widget
-                            div.addClass("hidden");
-                            btn.removeClass("active");
-                        }
-                        setTimeout(function() {
-                            $(window).trigger('resize');
-                        }, 200);
-                    });
-                  }
-                );
-              }
-            );
+            //         var btn = $('#com-chilipeppr-ws-menu .webcam-button');
+            //         var div = $('#com-chilipeppr-ws-webcam');
+            //         div.addClass("hidden");
+            //         btn.click(function() {
+            //             if (div.hasClass("hidden")) {
+            //                 // show widget
+            //                 div.removeClass("hidden");
+            //                 btn.addClass("active");
+            //             } else {
+            //                 // hide widget
+            //                 div.addClass("hidden");
+            //                 btn.removeClass("active");
+            //             }
+            //             setTimeout(function() {
+            //                 $(window).trigger('resize');
+            //             }, 200);
+            //         });
+            //       }
+            //     );
+            //   }
+            // );
 
             // WebRTC Client com-chilipeppr-webrtcclient
             /*
