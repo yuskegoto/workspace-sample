@@ -1518,17 +1518,15 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
             // ); //End TinyG
 
             // GRBL
-            // com-chilipeppr-tinyg
             chilipeppr.load(
                 "com-chilipeppr-grbl-yg",
                 "https://yuskegoto.github.io/widget-grbl-yg/auto-generated-widget.html",
-        
                 function () {
                     cprequire(
-                    ["inline:com-chilipeppr-widget"],
+                    ["inline:com-chilipeppr-widget-grbl"],
             
-                    function (tinyg) {
-                        tinyg.init();
+                    function (grbl) {
+                        grbl.init();
                     });
                 }
             ); //End GRBL
