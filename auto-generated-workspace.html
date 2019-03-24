@@ -370,9 +370,9 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
                         spjs.setSingleSelectMode();
                         spjs.init({
                             isSingleSelectMode: true,
-                            defaultBuffer: "tinyg",
+                            defaultBuffer: "grbl",
                             defaultBaud: 115200,
-                            bufferEncouragementMsg: 'For your device please choose the "tinyg" or "tinygg2" buffer in the pulldown and a 115200 baud rate before connecting.'
+                            bufferEncouragementMsg: 'For your device please choose the "grbl" buffer in the pulldown and a 115200 baud rate before connecting.'
                         });
                         //spjs.showBody();
                         //spjs.consoleToggle();
@@ -574,7 +574,7 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
             this.svg2gcodeObj = function() {
                 return {
                     name: "svg2gcode",
-/*                     url: "http://raw.githubusercontent.com/chilipeppr/widget-svg2gcode/master/auto-generated-widget.html", */
+                    //  url: "http://raw.githubusercontent.com/chilipeppr/widget-svg2gcode/master/auto-generated-widget.html",
                     url: "https://yuskegoto.github.io/widget-svg2gcode-yg/auto-generated-widget.html",
                     id: "com-zipwhip-widget-svg2gcode",
                     btn: $('#com-chilipeppr-ws-menu .svg2gcode-button'),
