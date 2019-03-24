@@ -1,9 +1,9 @@
 # com-chilipeppr-workspace-yg
-This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG.
+This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards Pendeograph drawing machine with GRBL.
 
 ![alt text](screenshot.png "Screenshot")
 
-## ChiliPeppr Workspace / TinyG
+## ChiliPeppr Workspace / GRBL-Pendeograph
 
 All ChiliPeppr workspaces/widgets/elements are defined using cpdefine() which is a method
 that mimics require.js. Each defined object must have a unique ID so it does
@@ -12,8 +12,8 @@ not conflict with other ChiliPeppr objects.
 | Item                  | Value           |
 | -------------         | ------------- | 
 | ID                    | com-chilipeppr-workspace-yg |
-| Name                  | Workspace / TinyG |
-| Description           | This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG. |
+| Name                  | Workspace / GRBL-Pendeograph |
+| Description           | This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards Pendeograph drawing machine with GRBL. |
 | chilipeppr.load() URL | https://yuskegoto.github.io/workspace-yg/auto-generated-workspace.html |
 | Edit URL              | https://github.com/yuskegoto/workspace-yg |
 | Github URL            | https://github.com/yuskegoto/workspace-yg |
@@ -42,7 +42,7 @@ chilipeppr.load(
       ["inline:com-chilipeppr-workspace-yg"], // the id you gave your workspace
       function(myWorkspaceYg) {
         // Callback that is passed reference to the newly loaded workspace
-        console.log("Workspace / TinyG just got loaded.", myWorkspaceYg);
+        console.log("Workspace / GRBL-Pendeograph just got loaded.", myWorkspaceYg);
         myWorkspaceYg.init();
       }
     );
@@ -135,7 +135,7 @@ The table below shows, in order, the methods and properties inside the workspace
           </tr>
       </thead>
       <tbody>
-      <tr valign="top"><td>id</td><td>string</td><td>"com-chilipeppr-workspace-yg"<br><br>The ID of the widget. You must define this and make it unique.</td></tr><tr valign="top"><td>name</td><td>string</td><td>"Workspace / TinyG"</td></tr><tr valign="top"><td>desc</td><td>string</td><td>"This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG."</td></tr><tr valign="top"><td>url</td><td>string</td><td>"https://yuskegoto.github.io/workspace-yg/auto-generated-workspace.html"</td></tr><tr valign="top"><td>fiddleurl</td><td>string</td><td>"https://github.com/yuskegoto/workspace-yg"</td></tr><tr valign="top"><td>githuburl</td><td>string</td><td>"https://github.com/yuskegoto/workspace-yg"</td></tr><tr valign="top"><td>testurl</td><td>string</td><td>"https:/workspace.html"</td></tr><tr valign="top"><td>foreignSubscribe</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>foreignPublish</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>widgetConsole</td><td>object</td><td>Contains reference to the Console widget object. Hang onto the reference
+      <tr valign="top"><td>id</td><td>string</td><td>"com-chilipeppr-workspace-yg"<br><br>The ID of the widget. You must define this and make it unique.</td></tr><tr valign="top"><td>name</td><td>string</td><td>"Workspace / GRBL-Pendeograph"</td></tr><tr valign="top"><td>desc</td><td>string</td><td>"This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards Pendeograph drawing machine with GRBL."</td></tr><tr valign="top"><td>url</td><td>string</td><td>"https://yuskegoto.github.io/workspace-yg/auto-generated-workspace.html"</td></tr><tr valign="top"><td>fiddleurl</td><td>string</td><td>"https://github.com/yuskegoto/workspace-yg"</td></tr><tr valign="top"><td>githuburl</td><td>string</td><td>"https://github.com/yuskegoto/workspace-yg"</td></tr><tr valign="top"><td>testurl</td><td>string</td><td>"https:/workspace.html"</td></tr><tr valign="top"><td>foreignSubscribe</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>foreignPublish</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>widgetConsole</td><td>object</td><td>Contains reference to the Console widget object. Hang onto the reference
 so we can resize it when the window resizes because we want it to manually
 resize to fill the height of the browser so it looks clean.</td></tr><tr valign="top"><td>widgetSpjs</td><td>object</td><td>Contains reference to the Serial Port JSON Server object.</td></tr><tr valign="top"><td>init</td><td>function</td><td>function() <br><br>The workspace's init method. It loads the all the widgets contained in the workspace
 and inits them.</td></tr><tr valign="top"><td>getBillboard</td><td>function</td><td>function() <br><br>Returns the billboard HTML, CSS, and Javascript for this Workspace. The billboard

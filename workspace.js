@@ -27,7 +27,7 @@ cprequire_test(["inline:com-chilipeppr-workspace-yg"], function(ws) {
     ws.init();
 
     // Do some niceties for testing like margins on widget and title for browser
-    $('title').html("Tinyg Workspace");
+    $('title').html("Yuske's Workspace for Pendeograph");
     $('body').css('padding', '10px');
 
 } /*end_test*/ );
@@ -39,8 +39,8 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
          * The ID of the widget. You must define this and make it unique.
          */
         id: "com-chilipeppr-workspace-yg", // Make the id the same as the cpdefine id
-        name: "Workspace / Pendeograph", // The descriptive name of your widget.
-        desc: `This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards Pendeograph drawing machine using GRBL.`,
+        name: "Workspace / GRBL-Pendeograph", // The descriptive name of your widget.
+        desc: `This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards Pendeograph drawing machine with GRBL.`,
         url: "(auto fill by runme.js)", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
         fiddleurl: "(auto fill by runme.js)", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
         githuburl: "(auto fill by runme.js)", // The backing github repo
@@ -1272,27 +1272,43 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
             //     }
             // ); //End XYZ
             
-            // TinyG
-            // http://jsfiddle.net/chilipeppr/XxEBZ/
+            // // TinyG
+            // // http://jsfiddle.net/chilipeppr/XxEBZ/
+            // // com-chilipeppr-tinyg
+            // chilipeppr.load(
+            //     "com-chilipeppr-tinyg",
+            //     // Lauer's v2 (Jul 28th 2015) Fixed to {"sv":1}
+            //     "http://raw.githubusercontent.com/chilipeppr/widget-tinyg/master/auto-generated-widget.html",
+            //     // Danal's version
+            //     //"http://fiddle.jshell.net/Danal/6rq2wx3o/show/light/",
+            //     // Lauer's version
+            //     //"http://fiddle.jshell.net/chilipeppr/XxEBZ/show/light/",
+        
+            //     function () {
+            //         cprequire(
+            //         ["inline:com-chilipeppr-widget-tinyg"],
+            
+            //         function (tinyg) {
+            //             tinyg.init();
+            //         });
+            //     }
+            // ); //End TinyG
+
+            // GRBL
             // com-chilipeppr-tinyg
             chilipeppr.load(
-                "com-chilipeppr-tinyg",
-                // Lauer's v2 (Jul 28th 2015) Fixed to {"sv":1}
-                "http://raw.githubusercontent.com/chilipeppr/widget-tinyg/master/auto-generated-widget.html",
-                // Danal's version
-                //"http://fiddle.jshell.net/Danal/6rq2wx3o/show/light/",
-                // Lauer's version
-                //"http://fiddle.jshell.net/chilipeppr/XxEBZ/show/light/",
+                "com-chilipeppr-grbl-yg",
+                "https://yuskegoto.github.io/widget-grbl-yg/auto-generated-widget.html",
         
                 function () {
                     cprequire(
-                    ["inline:com-chilipeppr-widget-tinyg"],
+                    ["inline:com-chilipeppr-widget"],
             
                     function (tinyg) {
                         tinyg.init();
                     });
                 }
-            ); //End TinyG
+            ); //End GRBL
 
             // // Cayenn Widget
             // chilipeppr.load(
