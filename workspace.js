@@ -353,9 +353,9 @@ cpdefine("inline:com-chilipeppr-workspace-yg", ["chilipeppr_ready"], function() 
                     name: "svg2gcode",
                     //  url: "http://raw.githubusercontent.com/chilipeppr/widget-svg2gcode/master/auto-generated-widget.html",
                     url: "https://yuskegoto.github.io/widget-svg2gcode-yg/auto-generated-widget.html",
-                    id: "com-zipwhip-widget-svg2gcode",
+                    id: "com-zipwhip-widget-svg2gcode-yg",
                     btn: $('#com-chilipeppr-ws-menu .svg2gcode-button'),
-                    div: $('#com-chilipeppr-ws-svg2gcode'),
+                    div: $('#com-chilipeppr-ws-svg2gcode-yg'),
                     instance: null,
                     init: function() {
                         this.btn.click(this.toggle.bind(this));

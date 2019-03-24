@@ -192,6 +192,7 @@ var testUrl = 'secure test url';
 var testUrlNoSsl = 'Non secure test url';
 // var editUrl = gitUrl.url;
 var editUrl = 'editUrl';
+var localTestUrl = 'local test url'
 
 var github;
 
@@ -204,6 +205,7 @@ var init = function() {
   testUrl = github.rawurl;
   testUrlNoSsl = github.rawurl.replace(RegExp('https'), 'http');
   editUrl = github.url;
+  localTestUrl = 'http://localhost:8080/workspace.html'
 }
 
 var isEvaled = false;
@@ -437,6 +439,7 @@ not conflict with other ChiliPeppr objects.
 | Edit URL              | $widget-editurl |
 | Github URL            | $widget-giturl |
 | Test URL              | $widget-testurl |
+| Local Test URL        | $widget-localtesturl |
 
 ## Example Code for chilipeppr.load() Statement
 
@@ -600,7 +603,8 @@ will you build on top of it?
   md = md.replace(/\$widget-editurl/g, editUrl);
   md = md.replace(/\$widget-giturl/g, github.url);
   md = md.replace(/\$widget-testurl/g, testUrl);
-  
+  md = md.replace(/\$widget-localtesturl/g, localTestUrl);
+
   var cpload = generateCpLoadStmt();
   md = md.replace(/\$widget-cploadjs/g, cpload);
 
@@ -862,6 +866,13 @@ var generateWidgetDocs = function() {
                   <span style="font-size:9px">(Cloud9 runme.js must be running)</span>
               </td>
           </tr>
+          <tr>
+              <td>Local Test URL</td>
+              <td class="pubsub-localtesturl">
+                  <a target="_blank" href="$pubsub-localtesturl">$pubsub-localtesturl</a>
+                  <span style="font-size:9px">(Cloud9 runme.js must be running)</span>
+              </td>
+          </tr>
       </tbody>
   </table>
   
@@ -1041,7 +1052,8 @@ var generateWidgetDocs = function() {
   html = html.replace(/\$pubsub-github/g, github.url);
   html = html.replace(/\$pubsub-testurlnossl/g, testUrlNoSsl);
   html = html.replace(/\$pubsub-testurl/g, testUrl);
-  
+  html = html.replace(/\$pubsub-localtesturl/g, localTestUrl);
+
   var cpload = generateCpLoadStmt();
   html = html.replace(/\$cp-load-stmt/g, cpload);
   
