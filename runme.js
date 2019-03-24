@@ -869,7 +869,6 @@ var generateWidgetDocs = function() {
               <td>Local Test URL</td>
               <td class="pubsub-localtesturl">
                   <a target="_blank" href="$pubsub-localtesturl">$pubsub-localtesturl</a>
-                  <span style="font-size:9px">(Cloud9 runme.js must be running)</span>
               </td>
           </tr>
       </tbody>
