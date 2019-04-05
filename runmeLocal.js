@@ -205,7 +205,7 @@ var init = function() {
   testUrl = github.rawurl;
   testUrlNoSsl = github.rawurl.replace(RegExp('https'), 'http');
   editUrl = github.url;
-  localTestUrl = 'http://localhost:8080/workspace.html'
+  localTestUrl = 'http://localhost:8080/' + fileHtmlPath;
 }
 
 var isEvaled = false;
