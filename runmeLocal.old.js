@@ -13,8 +13,7 @@
 var http = require('http'),
   url = require('url'),
   path = require('path'),
-  fs = require('fs'),
-  portNo = '8080';
+  fs = require('fs');
 
 var mimeTypes = {
   "html": "text/html",
@@ -47,9 +46,8 @@ http.createServer(function(req, res) {
     notes += "<p>Generated a new " + fileAutoGeneratePath + " file...</p>";
     //pushToGithub();
     // pushToGithubSync();
-
-    // pushToGithubAsync();
-    // notes += "<p>Pushed updates to Github...</p>";
+    pushToGithubAsync();
+    notes += "<p>Pushed updates to Github...</p>";
 
     //html = html + htmlDocs;
     var finalHtml = htmlDocs.replace(/<!-- pre-notes -->/, notes);
@@ -61,10 +59,7 @@ http.createServer(function(req, res) {
     
     console.log("/pushtogithub called");
     
-    // git push sync not working...
-    // var stdout = pushToGithubSync()
-    pushToGithubAsync();
-    var stdout = "Git sync not working. Hopefully pushed";
+    var stdout = pushToGithubSync()
     
     var json = {
       success: true,
@@ -161,19 +156,17 @@ http.createServer(function(req, res) {
   }
 
 // }).listen(process.env.PORT);
-}).listen(portNo);
+}).listen(8080);
 
 String.prototype.regexIndexOf = function(regex, startpos) {
     var indexOf = this.substring(startpos || 0).search(regex);
     return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
 }
 
-// var widgetType = 'widget'
-var widgetType = 'workspace'
-var fileAutoGeneratePath = "auto-generated-" +  widgetType + ".html"
-var fileJsPath = widgetType + ".js"
-var fileCssPath = widgetType + ".css"
-var fileHtmlPath = widgetType + ".html"
+var fileAutoGeneratePath = "auto-generated-workspace.html"
+var fileJsPath = "workspace.js"
+var fileCssPath = "workspace.css"
+var fileHtmlPath = "workspace.html"
 
 
 // var widgetUrl = 'http://' +
@@ -212,7 +205,7 @@ var init = function() {
   testUrl = github.rawurl;
   testUrlNoSsl = github.rawurl.replace(RegExp('https'), 'http');
   editUrl = github.url;
-  localTestUrl = 'http://localhost:' + portNo + '/' + fileHtmlPath;
+  localTestUrl = 'http://localhost:8080/' + fileHtmlPath;
 }
 
 var isEvaled = false;
@@ -1204,32 +1197,31 @@ var pushToGithub = function() {
   console.log("Pushed to github");
 }
 
-// git sync push process, not wroking now...
-// var pushToGithubSync = function() {  
-//   var proc = require('child_process');
-//   console.log("in the git sync process");
-//   // git add *
-//   // git commit -m "Made some changes to ChiliPeppr widget using Cloud9"
-//   // git push
-//   var stdout = "";
-//   stdout += "> git add *\n";
-//   stdout += '> git commit -m "Made some changes to ChiliPeppr myWorkspace"\n';
-//   stdout += "> git push\n";
-//   // stdout += proc.execSync('git add *; git commit -m "Made some changes to ChiliPeppr test workspace on local"; git push;', { encoding: 'utf8' });
-//   stdout += proc.execSync('git add .', { encoding: 'utf8' });
-//   stdout += proc.execSync('git commit', { encoding: 'utf8' });
-//   stdout += proc.execSync('git push', { encoding: 'utf8' });
-//   console.log("Pushed to github sync. Stdout:", stdout);
+var pushToGithubSync = function() {
   
-//   return stdout;
-// }
+  var proc = require('child_process');
+  
+  // git add *
+  // git commit -m "Made some changes to ChiliPeppr widget using Cloud9"
+  // git push
+  var stdout = "";
+  stdout += "> git add *\n";
+  stdout += '> git commit -m "Made some changes to ChiliPeppr myWorkspace"\n';
+  stdout += "> git push\n";
+  stdout += proc.execSync('git add *; git commit -m "Made some changes to ChiliPeppr test workspace on local"; git push;', { encoding: 'utf8' });
+  console.log("Pushed to github sync. Stdout:", stdout);
+  
+  return stdout;
+}
 
 var pushToGithubAsync = function() {
   var exec = require('child_process').exec;
+ 
   exec('git add *', function(error1, stdout1, stderr1) {
+    // command output is in stdout
     console.log("stdout:", stdout1, "stderr:", stderr1);
     // exec('bash -c "git commit -m \\"Made some changes to ChiliPeppr test workspace\\""', function(error2, stdout2, stderr2) {
-    exec('git commit -m "Auto commit for Pendeograph workspace"', function (error2, stdout2, stderr2) {
+    exec('git commit -m "Made some changes to ChiliPeppr test workspace"', function (error2, stdout2, stderr2) {
       // command output is in stdout
       console.log("stdout:", stdout2, "stderr:", stderr2);
       exec('git push', function(error3, stdout3, stderr3) {
