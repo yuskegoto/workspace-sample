@@ -247,7 +247,7 @@ var evalWidgetJs = function() {
   // rewrite the javascript
   //fs.writeFileSync(fileJsPath, widgetSrc);
   
-  console.log("before we eval here is the src:", widgetSrc);
+  // console.log("before we eval here is the src:", widgetSrc);
   eval(widgetSrc);
   //console.log("evaled the widget.js");
   //isEvaled = true;
